@@ -1,5 +1,6 @@
 package com.example.infrastructure.schema;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import lombok.Data;
  */
 @RedisHash("WeatherSchema")
 @Data
-public class WeatherSchema {
+public class WeatherSchema implements Serializable {
   @Id
   private String city;
   private float precipitationForTheNextOneHour;

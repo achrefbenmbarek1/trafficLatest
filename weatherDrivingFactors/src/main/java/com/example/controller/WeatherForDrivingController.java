@@ -1,12 +1,12 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,15 +23,14 @@ import com.example.infrastructure.dto.WeatherDto;
  * WeaterController
  */
 @RestController
-@RequestMapping("/weather")
-@CrossOrigin
 public class WeatherForDrivingController {
   @Autowired
   private WeatherForDrivingService weatherForDrivingService;
   private final RestTemplate restTemplate = new RestTemplate();
-
-  @PostMapping("/{city}")
+  
+  @PostMapping("/weather/{city}")
   public ResponseEntity<String> computeWeather(@PathVariable String city) {
+    System.out.println("hey");
     String url = "https://api.openweathermap.org/data/2.5/weather?lat=34.0479&lon=10.6197&appid=0917ed7b90429faccd44fe6c5915fd63&lang=ar";
     try {
       ResponseEntity<WeatherDto> response = this.restTemplate.getForEntity(url, WeatherDto.class);
@@ -64,5 +63,10 @@ public class WeatherForDrivingController {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception occurred");
     }
   }
+  @GetMapping("/hello")
+    public String sayHello() {
+        weatherForDrivingService.getWeather();
+        return "Hello!";
+    }
 
 }
