@@ -27,7 +27,6 @@ public class WeatherForDrivingService {
     Weather weather = new Weather(computeWeatherCmd.getTemperature(), computeWeatherCmd.getHumidity());
     WeatherSchema weatherSchema = new WeatherSchema(computeWeatherCmd.getCity(),computeWeatherCmd.getPrecipitationForTheNextOneHour(),computeWeatherCmd.getSnowForTheNextOneHour(),computeWeatherCmd.getVisibility(),weather.isFoggy(),computeWeatherCmd.getWeatherDescriptions());
      weatherRepository.save(weatherSchema);
-    System.out.println("Programmmmmmer!!!");
     System.out.println(computeWeatherCmd.getWeatherDescriptions());
 
     return weather.isFoggy();
